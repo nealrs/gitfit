@@ -1,7 +1,9 @@
 ##GitFit - A pre-commit hook using the Fitbit API
 
+![console screenshot](https://raw.githubusercontent.com/nealrs/gitfit/master/screen.png)
+
 ###What it does
-Prevents you from commiting code unless you've met your primary Fitbit goal for the day.
+Prevents you from committing code unless you've met your primary Fitbit goal for the day.
 
 ###Motivation
 After coming home from work, I eat dinner in front of my TV and frequently code until ~3am. This is unhealthy. To limit all-nighters, I need to enforce some restrictions. Now, in order to commit code I must first meet one of my Fitbit goals (10,000 steps, 5 miles, or being very active for 30 minutes). If I miss my goal the commit is rejected -- which also means I can't deploy.
