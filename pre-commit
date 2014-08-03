@@ -1,0 +1,58 @@
+#!/usr/bin/python
+#-*- mode: python -*-
+
+## INSTRUCTIONS
+# 0. Install the Python fitbit API wrapper (pip install fitbit)
+# 1. Make sure file is executable (chmod u+x pre-commit) & saved to your hooks folder (global or repo level)
+# 2. Create a new Fitbit app & get your API keys here: https://dev.fitbit.com/apps/new
+# 3. Find your user id by viewing your profile online & noting down the string that comes after https://www.fitbit.com/user/ (mine is 2SZVTN)
+# 4. Make sure your Activities are set to be public here: https://www.fitbit.com/user/profile/privacy
+
+## PARAMETERS
+ck = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' 		# your API consumer key
+cs = 'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY' 		# your API consumer secret
+id = 'ZZZZZZ'																# your fitbit user id
+t = 2 																			# 1 for steps, 2 for distance, 3 for active minutes
+v = .8																			# threshold (of course, you could just set this to 1 and adjust your goals)
+
+import sys
+import fitbit
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
+## API CALLS
+fb = fitbit.Fitbit(ck, cs)
+if (t == 1):
+  g = fb.activities(user_id=id)['goals']['steps'] 	# target
+	a = fb.activities(user_id=id)['summary']['steps']	# actual
+	q = "steps"
+
+elif (t == 2):
+	g = fb.activities(user_id=id)['goals']['distance']
+	a = fb.activities(user_id=id)['summary']['distances'][0]['distance']
+	q = "mi/km"
+
+elif (t == 3):
+	g = fb.activities(user_id=id)['goals']['activeMinutes']
+	a = fb.activities(user_id=id)['summary']['veryActiveMinutes']
+	q = "active minutes"
+
+## OUTPUT
+print bcolors.OKBLUE + "-------" + bcolors.ENDC
+print bcolors.HEADER + "Fitness Check (via FitBit)" + bcolors.ENDC
+print bcolors.OKGREEN + "Target:" + bcolors.ENDC, g, q, "[",'{0:g}'.format(.8*g), "minimum ]"
+print bcolors.WARNING + "Actual:" + bcolors.ENDC, a, q, "\n"
+
+if ( a>=.8*g ):
+	print bcolors.OKGREEN + "Commit approved. Hack on!" + bcolors.ENDC
+	print bcolors.OKBLUE + "-------" + bcolors.ENDC
+	sys.exit(0)
+else:
+	print bcolors.FAIL + "Commit NOT approved. Go outside!" + bcolors.ENDC
+	print bcolors.OKBLUE + "-------" + bcolors.ENDC
+	sys.exit(1)
