@@ -1,4 +1,4 @@
-##Fitbit Pre-commit Hook
+##GitFit - A pre-commit hook using the Fitbit API
 
 ###What it does
 Prevents you from commiting code unless you've met your primary Fitbit goal for the day.
