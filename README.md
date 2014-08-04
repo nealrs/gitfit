@@ -14,6 +14,6 @@ _Areas for improvement:_ right now, even if I hit my goal, I can't code after mi
 0. Install the Python Fitbit API wrapper `pip install fitbit`
 1. Make sure hook is executable `chmod u+x pre-commit` & saved to your hooks folder (global or repo level)
 2. [Create a new Fitbit app](https://dev.fitbit.com/apps/new) & note down your API keys
-3. Get your userid by vising your profile online & noting down the string that comes after `https://www.fitbit.com/user/` (mine is [2SZVTN](https://www.fitbit.com/user/2SZVTN))
+3. Get your userid by visiting your profile online & noting down the string that comes after `https://www.fitbit.com/user/` (mine is [2SZVTN](https://www.fitbit.com/user/2SZVTN))
 4. Make sure your Activities are public here: https://www.fitbit.com/user/profile/privacy
-5. Try commiting something
+5. Try committing something
